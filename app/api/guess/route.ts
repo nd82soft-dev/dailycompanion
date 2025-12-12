@@ -3,6 +3,20 @@ import { z } from "zod";
 
 export const runtime = "nodejs"; // easier for SDKs + larger payloads
 
+export async function POST(req: Request) {
+  const body = await req.json().catch(() => ({}));
+  return NextResponse.json({
+    ok: true,
+    receivedKeys: Object.keys(body ?? {}),
+    items: [],
+  });
+}
+
+// Optional: makes browser testing easy (GET will be 200 instead of 405)
+export async function GET() {
+  return NextResponse.json({ ok: true, message: "Use POST /api/food/guess" });
+}
+
 const ReqSchema = z.object({
   imageBase64: z.string().min(100),
   mealHint: z.string().optional(),
@@ -103,4 +117,5 @@ export async function POST(req: Request) {
   } catch (e: any) {
     return NextResponse.json({ error: e?.message || "Bad request" }, { status: 400 });
   }
+
 }
