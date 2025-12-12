@@ -4,7 +4,7 @@ import { z } from "zod";
 export const runtime = "nodejs";
 
 const ReqSchema = z.object({
-  imageBase64: z.string().min(100),
+  imageBase64: z.string().min(10),
   mealHint: z.string().optional(),
 });
 
