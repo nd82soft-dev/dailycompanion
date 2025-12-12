@@ -1,7 +1,11 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
-export const runtime = "nodejs"; // easier for SDKs + larger payloads
+export const runtime = "nodejs";
+
+export async function GET() {
+  return NextResponse.json({ ok: true, message: "Use POST /api/food/guess" });
+}
 
 export async function POST(req: Request) {
   const body = await req.json().catch(() => ({}));
@@ -11,7 +15,6 @@ export async function POST(req: Request) {
     items: [],
   });
 }
-
 // Optional: makes browser testing easy (GET will be 200 instead of 405)
 export async function GET() {
   return NextResponse.json({ ok: true, message: "Use POST /api/food/guess" });
@@ -119,3 +122,4 @@ export async function POST(req: Request) {
   }
 
 }
+
