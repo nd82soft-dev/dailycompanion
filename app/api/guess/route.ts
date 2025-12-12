@@ -15,6 +15,9 @@ export async function POST(req: Request) {
     items: [],
   });
 }
+
+
+
 // Optional: makes browser testing easy (GET will be 200 instead of 405)
 export async function GET() {
   return NextResponse.json({ ok: true, message: "Use POST /api/food/guess" });
@@ -122,4 +125,5 @@ export async function POST(req: Request) {
   }
 
 }
+
 
